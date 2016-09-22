@@ -3,12 +3,22 @@ package hello.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import static hello.Constants.UPDATED;
+
 @SuppressWarnings("unused")
 public class Repositories {
 
     private List<Repo> repo = new ArrayList<>();
 
     private String updated;
+
+    public Repositories() {
+    }
+
+    public Repositories(List<Repo> repo, String updated) {
+        this.repo = repo;
+        this.updated = updated;
+    }
 
     public List<Repo> getRepo() {
         return repo;
@@ -29,7 +39,7 @@ public class Repositories {
         List<Repo> repos = new ArrayList<>(1);
         repos.add(Repo.createRepo());
         repositories.setRepo(repos);
-        repositories.setUpdated("2016-06-17T14:57:33.424Z");
+        repositories.setUpdated(UPDATED);
         return repositories;
     }
 }

@@ -1,11 +1,21 @@
 package hello.domain;
 
+import static hello.Constants.TOKEN;
+
 @SuppressWarnings("unused")
-public class Data {
+public class UserData {
 
     private User user;
 
     private String token;
+
+    public UserData() {
+    }
+
+    public UserData(User user, String token) {
+        this.user = user;
+        this.token = token;
+    }
 
     public User getUser() {
         return user;
@@ -21,10 +31,10 @@ public class Data {
         this.token = token;
     }
 
-    public static Data createData() {
-        Data data = new Data();
+    public static UserData createData() {
+        UserData data = new UserData();
         data.setUser(User.createUser());
-        data.setToken("gigipghwerfipug3hre3fgg");
+        data.setToken(TOKEN);
         return data;
     }
 }

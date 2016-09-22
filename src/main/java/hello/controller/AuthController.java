@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import hello.domain.AbsEntity;
-import hello.domain.Error;
+import hello.response.ErrorResponse;
 import hello.request.UserLoginRequest;
+import hello.response.AbsResponse;
 
 import static hello.response.UserModelResponse.createUserModelResponse;
 
@@ -17,11 +17,11 @@ import static hello.response.UserModelResponse.createUserModelResponse;
 public class AuthController {
 
     @RequestMapping("/login")
-    public ResponseEntity<AbsEntity> user(@RequestBody UserLoginRequest request) {
+    public ResponseEntity<AbsResponse> user(@RequestBody UserLoginRequest request) {
         if (request.getEmail().equals("sevoro.sv@gmail.com") && request.getPassword().equals("12345")) {
             return new ResponseEntity<>(createUserModelResponse(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(new Error("wrong username or password"), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(new ErrorResponse("wrong username or password"), HttpStatus.FORBIDDEN);
         }
     }
 }

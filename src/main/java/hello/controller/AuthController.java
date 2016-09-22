@@ -14,7 +14,7 @@ import static hello.response.UserModelResponse.createUserModelResponse;
 
 @Controller
 @SuppressWarnings("unused")
-public class UserController {
+public class AuthController {
 
     @RequestMapping("/login")
     public ResponseEntity<AbsEntity> user(@RequestBody UserLoginRequest request) {

@@ -1,6 +1,5 @@
 package hello.controller;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +17,6 @@ import static hello.Constants.USED_ID;
 import static hello.response.UpdateContactsResponse.createUpdateContactsResponse;
 import static hello.response.UserModelResponse.createUserModelResponse;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
-import static org.springframework.http.HttpStatus.OK;
 
 @Controller
 @SuppressWarnings("unused")
@@ -27,9 +25,13 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<AbsResponse> login(@RequestBody UserLoginRequest request) {
         if (request.getEmail().equals("sevoro.sv@gmail.com") && request.getPassword().equals("12345")) {
-            return new ResponseEntity<>(createUserModelResponse(), HttpStatus.OK);
+            return ResponseEntity
+                    .ok()
+                    .body(createUserModelResponse());
         } else {
-            return new ResponseEntity<>(new ErrorResponse("wrong username or password"), FORBIDDEN);
+            return ResponseEntity
+                    .status(FORBIDDEN)
+                    .body(new ErrorResponse("wrong username or password"));
         }
     }
 
@@ -39,9 +41,12 @@ public class UserController {
             @RequestHeader(value = "Request-User-Id") String userId) {
 
         if (token.equals(Constants.TOKEN)) {
-            return new ResponseEntity<>(createUpdateContactsResponse(), OK);
+            return ResponseEntity
+                    .ok()
+                    .body(createUpdateContactsResponse());
         } else {
-            return new ResponseEntity<>(new ErrorResponse("Bad token"), FORBIDDEN);
+            return ResponseEntity.status(FORBIDDEN)
+                    .body(new ErrorResponse("Bad token"));
         }
     }
 }

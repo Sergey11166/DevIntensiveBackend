@@ -1,6 +1,5 @@
 package hello.controller;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +13,7 @@ import static hello.Constants.TOKEN;
 import static hello.Constants.USED_ID;
 import static hello.domain.LikesData.createLikeData;
 import static hello.domain.LikesData.createUnlikeData;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 /**
  * @author Sergey Vorobyev
@@ -28,10 +28,12 @@ class LikesController {
             @RequestHeader(value = "Request-User-Id") String userId) {
 
         if (token.equals(TOKEN)) {
-            return new ResponseEntity<>(
-                    new LikeResponse(createLikeData()), HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .body(new LikeResponse(createLikeData()));
         } else {
-            return new ResponseEntity<>(new ErrorResponse("Bad token"), HttpStatus.FORBIDDEN);
+            return ResponseEntity
+                    .status(FORBIDDEN)
+                    .body(new ErrorResponse("Bad token"));
         }
     }
 
@@ -40,10 +42,13 @@ class LikesController {
                                             @RequestHeader(value = "Request-User-Id") String userId) {
 
         if (token.equals(TOKEN)) {
-            return new ResponseEntity<>(
-                    new LikeResponse(createUnlikeData()), HttpStatus.OK);
+            return ResponseEntity
+                    .ok()
+                    .body(new LikeResponse(createUnlikeData()));
         } else {
-            return new ResponseEntity<>(new ErrorResponse("Bad token"), HttpStatus.FORBIDDEN);
+            return ResponseEntity
+                    .status(FORBIDDEN)
+                    .body(new ErrorResponse("Bad token"));
         }
     }
 }

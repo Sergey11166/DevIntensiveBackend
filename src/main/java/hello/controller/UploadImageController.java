@@ -3,7 +3,6 @@ package hello.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +30,7 @@ import static hello.Constants.TOKEN;
 import static hello.Constants.USED_ID;
 import static hello.domain.ImageData.createImageDataAvatar;
 import static hello.domain.ImageData.createImageDataProfilePhoto;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 /**
  * @author Sergey Vorobyev
@@ -68,7 +68,7 @@ class UploadImageController {
         Resource file = storageService.loadAsResource(filename);
         return ResponseEntity
                 .ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+file.getFilename()+"\"")
+                .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
                 .body(file);
     }
 
@@ -92,10 +92,13 @@ class UploadImageController {
 
         if (token.equals(TOKEN)) {
             storageService.store(file);
-            return new ResponseEntity<>(
-                    new ImageUploadedResponse(createImageDataProfilePhoto()), HttpStatus.OK);
+            return ResponseEntity
+                    .ok()
+                    .body(new ImageUploadedResponse(createImageDataProfilePhoto()));
         } else {
-            return new ResponseEntity<>(new ErrorResponse("Bad token"), HttpStatus.FORBIDDEN);
+            return ResponseEntity
+                    .status(FORBIDDEN)
+                    .body(new ErrorResponse("Bad token"));
         }
     }
 
@@ -106,10 +109,13 @@ class UploadImageController {
 
         if (token.equals(TOKEN)) {
             storageService.store(file);
-            return new ResponseEntity<>(
-                    new ImageUploadedResponse(createImageDataAvatar()), HttpStatus.OK);
+            return ResponseEntity
+                    .ok()
+                    .body(new ImageUploadedResponse(createImageDataAvatar()));
         } else {
-            return new ResponseEntity<>(new ErrorResponse("Bad token"), HttpStatus.FORBIDDEN);
+            return ResponseEntity
+                    .status(FORBIDDEN)
+                    .body(new ErrorResponse("Bad token"));
         }
     }
 

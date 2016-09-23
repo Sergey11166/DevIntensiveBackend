@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -79,6 +80,8 @@ public class FileSystemStorageService implements StorageService {
 
     @Override
     public void init() {
+        File root = rootLocation.toFile();
+        if (root.exists()) return;
         try {
             Files.createDirectory(rootLocation);
         } catch (IOException e) {

@@ -4,16 +4,17 @@ package hello.response;
  * @author Sergey Vorobyev
  */
 
+@SuppressWarnings("unused")
 public class ErrorResponse extends AbsResponse {
 
     private String err;
 
-    public ErrorResponse(boolean success) {
-        super(success);
+    public ErrorResponse() {
+        super(false);
     }
 
     public ErrorResponse(String err) {
-        super(false);
+        this();
         this.err = err;
     }
 

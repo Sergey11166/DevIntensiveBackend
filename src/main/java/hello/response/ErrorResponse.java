@@ -1,14 +1,19 @@
-package hello.domain;
+package hello.response;
 
 /**
  * @author Sergey Vorobyev
  */
 
-public class Error extends AbsEntity {
+public class ErrorResponse extends AbsResponse {
 
     private String err;
 
-    public Error(String err) {
+    public ErrorResponse(boolean success) {
+        super(success);
+    }
+
+    public ErrorResponse(String err) {
+        super(false);
         this.err = err;
     }
 

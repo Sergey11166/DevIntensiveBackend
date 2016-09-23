@@ -1,37 +1,29 @@
 package hello.response;
 
-import hello.domain.AbsEntity;
-import hello.domain.Data;
+import hello.domain.AuthData;
 
 /**
  * @author Sergey Vorobyev.
  */
 
 @SuppressWarnings("unused")
-public class UserModelResponse extends AbsEntity {
+public class UserModelResponse extends AbsResponse {
 
-    private boolean success;
+    private AuthData data;
 
-    private Data data;
-
-    public boolean isSuccess() {
-        return success;
-    }
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public UserModelResponse(AuthData data) {
+        super(true);
+        this.data = data;
     }
 
-    public Data getData() {
+    public AuthData getData() {
         return data;
     }
-    public void setData(Data data) {
+    public void setData(AuthData data) {
         this.data = data;
     }
 
     public static UserModelResponse createUserModelResponse() {
-        UserModelResponse response = new UserModelResponse();
-        response.setSuccess(true);
-        response.setData(Data.createData());
-        return response;
+        return new UserModelResponse(AuthData.createData());
     }
 }

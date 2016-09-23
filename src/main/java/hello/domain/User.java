@@ -1,5 +1,7 @@
 package hello.domain;
 
+import static hello.Constants.UPDATED;
+
 @SuppressWarnings("unused")
 public class User {
 
@@ -110,7 +112,7 @@ public class User {
         user.setV(0);
         user.setSpecialization("Android");
         user.setRole("user");
-        user.setUpdated("2016-06-25T10:54:44.507Z");
+        user.setUpdated(UPDATED);
 
         user.setRepositories(Repositories.createRepositories());
         user.setContacts(Contacts.createContacts());

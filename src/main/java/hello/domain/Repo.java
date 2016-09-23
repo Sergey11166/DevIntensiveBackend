@@ -9,6 +9,15 @@ public class Repo {
 
     private String title;
 
+    public Repo() {
+    }
+
+    public Repo(String id, String git, String title) {
+        this.id = id;
+        this.git = git;
+        this.title = title;
+    }
+
     public String getId() {
         return id;
     }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hello.Greeting;
 
 @RestController
+@SuppressWarnings("unused")
 public class GreetingController {
 
     private static final String template = "Hello, %s!";

@@ -1,5 +1,7 @@
 package hello.domain;
 
+import static hello.Constants.UPDATED;
+
 @SuppressWarnings("unused")
 class ProfileValues {
 
@@ -54,7 +56,7 @@ class ProfileValues {
         values.setProjects(5);
         values.setLinesCode(25000);
         values.setRating(10);
-        values.setUpdated("2016-06-17T14:57:33.423Z");
+        values.setUpdated(UPDATED);
         return values;
     }
 }

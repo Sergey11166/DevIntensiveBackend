@@ -1,5 +1,6 @@
 package hello;
 
+@SuppressWarnings("unused")
 public class Greeting {
 
     private final long id;

@@ -10,7 +10,7 @@ public class StorageProperties {
      */
     private String location = "upload-dir";
 
-    public String getLocation() {
+    String getLocation() {
         return location;
     }
 

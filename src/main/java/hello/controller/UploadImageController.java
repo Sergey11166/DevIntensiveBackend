@@ -28,6 +28,7 @@ import hello.storage.StorageFileNotFoundException;
 import hello.storage.StorageService;
 
 import static hello.Constants.TOKEN;
+import static hello.Constants.USED_ID;
 import static hello.domain.ImageData.createImageDataAvatar;
 import static hello.domain.ImageData.createImageDataProfilePhoto;
 
@@ -82,33 +83,33 @@ class UploadImageController {
         return "redirect:/files";
     }
 
-    @PostMapping("/user/1/publicValues/profilePhoto")
+    @PostMapping("/user/" + USED_ID + "/publicValues/profilePhoto")
     public ResponseEntity<AbsResponse> handleUserPhotoUpload(
             @RequestParam("file") MultipartFile file,
             @RequestHeader(value="X-Access-Token") String token,
             @RequestHeader(value = "Request-User-Id") String userId
     ) {
 
-        if (token.equals(TOKEN) && userId.equals("1")) {
+        if (token.equals(TOKEN)) {
             storageService.store(file);
             return new ResponseEntity<>(
-                    new ImageUploadedResponse(true, createImageDataProfilePhoto()), HttpStatus.OK);
+                    new ImageUploadedResponse(createImageDataProfilePhoto()), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(new ErrorResponse("Client Error"), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(new ErrorResponse("Bad token"), HttpStatus.FORBIDDEN);
         }
     }
 
-    @PostMapping("/user/1/publicValues/profileAvatar")
+    @PostMapping("/user/" + USED_ID + "/publicValues/profileAvatar")
     public ResponseEntity<AbsResponse> handleAvatarUpload(@RequestParam("file") MultipartFile file,
             @RequestHeader(value="X-Access-Token") String token,
             @RequestHeader(value = "Request-User-Id") String userId) {
 
-        if (token.equals(TOKEN) && userId.equals("1")) {
+        if (token.equals(TOKEN)) {
             storageService.store(file);
             return new ResponseEntity<>(
-                    new ImageUploadedResponse(true, createImageDataAvatar()), HttpStatus.OK);
+                    new ImageUploadedResponse(createImageDataAvatar()), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(new ErrorResponse("Client Error"), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(new ErrorResponse("Bad token"), HttpStatus.FORBIDDEN);
         }
     }
 

@@ -6,12 +6,17 @@ import hello.domain.ImageData;
  * @author Sergey Vorobyev.
  */
 
+@SuppressWarnings("unused")
 public class ImageUploadedResponse extends AbsResponse {
 
     private ImageData data;
 
-    public ImageUploadedResponse(boolean success, ImageData data) {
-        super(success);
+    public ImageUploadedResponse() {
+        super(true);
+    }
+
+    public ImageUploadedResponse(ImageData data) {
+        this();
         this.data = data;
     }
 

@@ -12,7 +12,7 @@ public interface Constants {
     String UPDATED         = "2016-07-12T13:37:16.088Z";
     String AVATAR_PATH     = "http://192.168.0.165:8080/files/avatar.jpg";
     String USER_PHOTO_PATH = "http://192.168.0.165:8080/files/user_photo.jpg";
-    String CONTACT_PHONE   = "+7 (917) 000-00-00";
+    String CONTACT_PHONE   = "+7(917)000-00-00";
     String CONTACT_EMAIL   = "sevoro.sv@gmail.com";
     String CONTACT_VK      = "vk.com/sergey11166";
 }

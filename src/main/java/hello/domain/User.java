@@ -1,11 +1,12 @@
 package hello.domain;
 
 import static hello.Constants.UPDATED;
+import static hello.Constants.USED_ID;
 
 @SuppressWarnings("unused")
 public class User {
 
-    private int id;
+    private String id;
 
     private String firstName;
 
@@ -27,10 +28,10 @@ public class User {
 
     private String updated;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -106,7 +107,7 @@ public class User {
 
     public static User createUser() {
         User user = new User();
-        user.setId(1);
+        user.setId(USED_ID);
         user.setFirstName("Сергей");
         user.setSecondName("Воробьёв");
         user.setV(0);

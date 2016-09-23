@@ -11,8 +11,12 @@ public class UserModelResponse extends AbsResponse {
 
     private AuthData data;
 
-    public UserModelResponse(AuthData data) {
+    public UserModelResponse() {
         super(true);
+    }
+
+    public UserModelResponse(AuthData data) {
+        this();
         this.data = data;
     }
 

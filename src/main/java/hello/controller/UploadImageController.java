@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,8 +30,6 @@ import hello.storage.StorageService;
 import static hello.Constants.TOKEN;
 import static hello.domain.ImageData.createImageDataAvatar;
 import static hello.domain.ImageData.createImageDataProfilePhoto;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * @author Sergey Vorobyev
@@ -41,7 +37,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @SuppressWarnings("unused")
-public class UploadImageController {
+class UploadImageController {
 
     private final StorageService storageService;
 
@@ -50,7 +46,7 @@ public class UploadImageController {
         this.storageService = storageService;
     }
 
-    @RequestMapping(value = "/files", method = GET)
+    @GetMapping("/files")
     public String listUploadedFiles(Model model) throws IOException {
 
         model.addAttribute("files", storageService
@@ -64,7 +60,7 @@ public class UploadImageController {
         return "uploadForm";
     }
 
-    @RequestMapping(value = "/files/{filename:.+}", method = GET)
+    @GetMapping("/files/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
 
@@ -86,13 +82,14 @@ public class UploadImageController {
         return "redirect:/files";
     }
 
-    @RequestMapping(value = "/user/1/publicValues/profilePhoto", method = POST)
+    @PostMapping("/user/1/publicValues/profilePhoto")
     public ResponseEntity<AbsResponse> handleUserPhotoUpload(
             @RequestParam("file") MultipartFile file,
             @RequestHeader(value="X-Access-Token") String token,
-            @RequestHeader(value = "Request-User-Id") String userId) {
+            @RequestHeader(value = "Request-User-Id") String userId
+    ) {
 
-        if (token != null && token.equals(TOKEN) && userId != null && userId.equals("1")) {
+        if (token.equals(TOKEN) && userId.equals("1")) {
             storageService.store(file);
             return new ResponseEntity<>(
                     new ImageUploadedResponse(true, createImageDataProfilePhoto()), HttpStatus.OK);
@@ -101,12 +98,12 @@ public class UploadImageController {
         }
     }
 
-    @RequestMapping(value = "/user/1/publicValues/profileAvatar", method = POST)
+    @PostMapping("/user/1/publicValues/profileAvatar")
     public ResponseEntity<AbsResponse> handleAvatarUpload(@RequestParam("file") MultipartFile file,
             @RequestHeader(value="X-Access-Token") String token,
             @RequestHeader(value = "Request-User-Id") String userId) {
 
-        if (token != null && token.equals(TOKEN) && userId != null && userId.equals("1")) {
+        if (token.equals(TOKEN) && userId.equals("1")) {
             storageService.store(file);
             return new ResponseEntity<>(
                     new ImageUploadedResponse(true, createImageDataAvatar()), HttpStatus.OK);

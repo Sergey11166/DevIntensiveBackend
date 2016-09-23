@@ -1,5 +1,10 @@
 package hello.domain;
 
+import static hello.Constants.CONTACT_EMAIL;
+import static hello.Constants.CONTACT_PHONE;
+import static hello.Constants.CONTACT_VK;
+import static hello.Constants.UPDATED;
+
 @SuppressWarnings("unused")
 public class Contacts {
 
@@ -41,9 +46,10 @@ public class Contacts {
 
     public static Contacts createContacts() {
         Contacts contacts = new Contacts();
-        contacts.setPhone("+7 (917) 000-00-00");
-        contacts.setEmail("sevoro.sv@gmail.com");
-        contacts.setVk("vk.com/sergey11166");
+        contacts.setPhone(CONTACT_PHONE);
+        contacts.setEmail(CONTACT_EMAIL);
+        contacts.setVk(CONTACT_VK);
+        contacts.setUpdated(UPDATED);
         return contacts;
     }
 }

@@ -13,6 +13,7 @@ import hello.response.LikeResponse;
 import static hello.Constants.TOKEN;
 import static hello.Constants.USED_ID;
 import static hello.domain.LikesData.createLikeData;
+import static hello.domain.LikesData.createUnlikeData;
 
 /**
  * @author Sergey Vorobyev
@@ -30,7 +31,19 @@ class LikesController {
             return new ResponseEntity<>(
                     new LikeResponse(createLikeData()), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(new ErrorResponse("Client Error"), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(new ErrorResponse("Bad token"), HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @PostMapping("/user/" + USED_ID + "/unlike")
+    public ResponseEntity<AbsResponse> unlike(@RequestHeader(value="X-Access-Token") String token,
+                                            @RequestHeader(value = "Request-User-Id") String userId) {
+
+        if (token.equals(TOKEN)) {
+            return new ResponseEntity<>(
+                    new LikeResponse(createUnlikeData()), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ErrorResponse("Bad token"), HttpStatus.FORBIDDEN);
         }
     }
 }

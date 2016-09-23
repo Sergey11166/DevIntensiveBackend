@@ -1,5 +1,6 @@
 package hello.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -81,6 +82,13 @@ public class LikesData {
         data.setRait(6);
         data.setUpdated(Constants.UPDATED);
         data.setRating(7);
+        return data;
+    }
+
+    public static LikesData createUnlikeData() {
+        LikesData data = createLikeData();
+        data.setLikesBy(new ArrayList<>());
+        data.setRating(6);
         return data;
     }
 }

@@ -95,7 +95,7 @@ class UploadImageController {
             return new ResponseEntity<>(
                     new ImageUploadedResponse(createImageDataProfilePhoto()), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(new ErrorResponse("Client Error"), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(new ErrorResponse("Bad token"), HttpStatus.FORBIDDEN);
         }
     }
 
@@ -109,7 +109,7 @@ class UploadImageController {
             return new ResponseEntity<>(
                     new ImageUploadedResponse(createImageDataAvatar()), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(new ErrorResponse("Client Error"), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(new ErrorResponse("Bad token"), HttpStatus.FORBIDDEN);
         }
     }
 

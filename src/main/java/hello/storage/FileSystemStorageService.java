@@ -26,14 +26,26 @@ public class FileSystemStorageService implements StorageService {
         this.rootLocation = Paths.get(properties.getLocation());
     }
 
+    private void deleteIfExist(Path path) {
+        try {
+            Files.deleteIfExists(rootLocation.resolve(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void store(MultipartFile file) {
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
-            Files.deleteIfExists(rootLocation.resolve(file.getOriginalFilename()));
-            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+            String name = file.getOriginalFilename().substring(14);
+            loadAll()
+                    .filter(f -> f.toString().contains(name))
+                    .forEach(this::deleteIfExist);
+
+            Files.copy(file.getInputStream(), rootLocation.resolve(file.getOriginalFilename()));
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }

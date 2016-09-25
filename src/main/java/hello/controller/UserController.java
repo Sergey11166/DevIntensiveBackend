@@ -1,5 +1,6 @@
 package hello.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,27 +8,50 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
+import java.nio.file.Path;
+import java.util.Optional;
+
 import hello.Constants;
 import hello.request.UpdateContactsRequest;
 import hello.request.UserLoginRequest;
 import hello.response.AbsResponse;
 import hello.response.ErrorResponse;
+import hello.storage.StorageService;
 
 import static hello.Constants.USED_ID;
 import static hello.response.UpdateContactsResponse.createUpdateContactsResponse;
 import static hello.response.UserModelResponse.createUserModelResponse;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Controller
 @SuppressWarnings("unused")
 public class UserController {
 
+    @Autowired private StorageService storage;
+
     @PostMapping("/login")
     public ResponseEntity<AbsResponse> login(@RequestBody UserLoginRequest request) {
         if (request.getEmail().equals("sevoro.sv@gmail.com") && request.getPassword().equals("12345")) {
-            return ResponseEntity
-                    .ok()
-                    .body(createUserModelResponse());
+
+            Optional<Path> userPhoto = storage.loadAll()
+                    .filter(path -> path.getFileName().toString().contains("user_photo"))
+                    .findFirst();
+
+            Optional<Path> avatar = storage.loadAll()
+                    .filter(path -> path.getFileName().toString().contains("avatar"))
+                    .findFirst();
+
+            if (userPhoto.isPresent() && avatar.isPresent()) {
+                return ResponseEntity
+                        .ok()
+                        .body(createUserModelResponse(userPhoto.get().getFileName().toString(),
+                                avatar.get().getFileName().toString()));
+            } else {
+                return ResponseEntity
+                        .status(NOT_FOUND)
+                        .body(new ErrorResponse("User photo or avatar not found"));
+            }
         } else {
             return ResponseEntity
                     .status(FORBIDDEN)

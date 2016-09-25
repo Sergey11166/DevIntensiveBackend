@@ -94,7 +94,7 @@ class UploadImageController {
             storageService.store(file);
             return ResponseEntity
                     .ok()
-                    .body(new ImageUploadedResponse(createImageDataProfilePhoto()));
+                    .body(new ImageUploadedResponse(createImageDataProfilePhoto(file.getOriginalFilename())));
         } else {
             return ResponseEntity
                     .status(FORBIDDEN)
@@ -111,7 +111,7 @@ class UploadImageController {
             storageService.store(file);
             return ResponseEntity
                     .ok()
-                    .body(new ImageUploadedResponse(createImageDataAvatar()));
+                    .body(new ImageUploadedResponse(createImageDataAvatar(file.getOriginalFilename())));
         } else {
             return ResponseEntity
                     .status(FORBIDDEN)

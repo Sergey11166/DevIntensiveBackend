@@ -37,16 +37,16 @@ public class ImageData {
         this.updated = updated;
     }
 
-    public static ImageData createImageDataProfilePhoto() {
+    public static ImageData createImageDataProfilePhoto(String fileName) {
         ImageData data = new ImageData();
-        data.setPhoto(USER_PHOTO_PATH);
+        data.setPhoto(USER_PHOTO_PATH.concat(fileName));
         data.setUpdated(UPDATED);
         return data;
     }
 
-    public static ImageData createImageDataAvatar() {
+    public static ImageData createImageDataAvatar(String fileName) {
         ImageData data = new ImageData();
-        data.setPhoto(AVATAR_PATH);
+        data.setPhoto(AVATAR_PATH.concat(fileName));
         data.setUpdated(UPDATED);
         return data;
     }

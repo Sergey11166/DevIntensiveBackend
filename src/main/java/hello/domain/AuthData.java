@@ -31,9 +31,9 @@ public class AuthData {
         this.token = token;
     }
 
-    public static AuthData createData() {
+    public static AuthData createData(String userPhoto, String avatar) {
         AuthData authData = new AuthData();
-        authData.setUser(User.createUser());
+        authData.setUser(User.createUser(userPhoto, avatar));
         authData.setToken(TOKEN);
         return authData;
     }

@@ -45,11 +45,11 @@ public class PublicInfo {
         this.updated = updated;
     }
 
-    public static PublicInfo createPublicInfo() {
+    public static PublicInfo createPublicInfo(String userPhoto, String avatar) {
         PublicInfo info = new PublicInfo();
         info.setBio(Constants.LOREM_IPSUM);
-        info.setAvatar(AVATAR_PATH);
-        info.setPhoto(USER_PHOTO_PATH);
+        info.setAvatar(AVATAR_PATH + avatar);
+        info.setPhoto(USER_PHOTO_PATH + userPhoto);
         info.setUpdated(UPDATED);
         return info;
     }

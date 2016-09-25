@@ -105,7 +105,7 @@ public class User {
         this.updated = updated;
     }
 
-    public static User createUser() {
+    public static User createUser(String userPhoto, String avatar) {
         User user = new User();
         user.setId(USED_ID);
         user.setFirstName("Сергей");
@@ -118,7 +118,7 @@ public class User {
         user.setRepositories(Repositories.createRepositories());
         user.setContacts(Contacts.createContacts());
         user.setProfileValues(ProfileValues.createProfileValues());
-        user.setPublicInfo(PublicInfo.createPublicInfo());
+        user.setPublicInfo(PublicInfo.createPublicInfo(userPhoto, avatar));
 
         return user;
     }

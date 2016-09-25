@@ -27,7 +27,7 @@ public class UserModelResponse extends AbsResponse {
         this.data = data;
     }
 
-    public static UserModelResponse createUserModelResponse() {
-        return new UserModelResponse(AuthData.createData());
+    public static UserModelResponse createUserModelResponse(String userPhoto, String avatar) {
+        return new UserModelResponse(AuthData.createData(userPhoto, avatar));
     }
 }

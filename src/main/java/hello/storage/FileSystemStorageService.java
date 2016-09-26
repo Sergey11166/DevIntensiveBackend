@@ -40,10 +40,13 @@ public class FileSystemStorageService implements StorageService {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
-            String name = file.getOriginalFilename().substring(14);
-            loadAll()
-                    .filter(f -> f.toString().contains(name))
-                    .forEach(this::deleteIfExist);
+
+            if (loadAll().count() != 0) {
+                String name = file.getOriginalFilename().substring(14);
+                loadAll()
+                        .filter(f -> f.toString().contains(name))
+                        .forEach(this::deleteIfExist);
+            }
 
             Files.copy(file.getInputStream(), rootLocation.resolve(file.getOriginalFilename()));
         } catch (IOException e) {

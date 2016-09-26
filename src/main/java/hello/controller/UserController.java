@@ -22,7 +22,6 @@ import static hello.Constants.USED_ID;
 import static hello.response.UpdateContactsResponse.createUpdateContactsResponse;
 import static hello.response.UserModelResponse.createUserModelResponse;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Controller
 @SuppressWarnings("unused")
@@ -42,16 +41,13 @@ public class UserController {
                     .filter(path -> path.getFileName().toString().contains("avatar"))
                     .findFirst();
 
-            if (userPhoto.isPresent() && avatar.isPresent()) {
-                return ResponseEntity
-                        .ok()
-                        .body(createUserModelResponse(userPhoto.get().getFileName().toString(),
-                                avatar.get().getFileName().toString()));
-            } else {
-                return ResponseEntity
-                        .status(NOT_FOUND)
-                        .body(new ErrorResponse("User photo or avatar not found"));
-            }
+            String userPhotoString = userPhoto.isPresent() ? userPhoto.get().getFileName().toString() : "0";
+            String avatarString = avatar.isPresent() ? avatar.get().getFileName().toString() : "0";
+
+            return ResponseEntity
+                    .ok()
+                    .body(createUserModelResponse(userPhotoString, avatarString));
+
         } else {
             return ResponseEntity
                     .status(FORBIDDEN)

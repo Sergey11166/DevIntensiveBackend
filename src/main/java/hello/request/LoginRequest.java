@@ -5,7 +5,7 @@ package hello.request;
  */
 
 @SuppressWarnings("unused")
-public class UserLoginRequest {
+public class LoginRequest {
 
     private String email;
 

@@ -1,8 +1,8 @@
 package hello.domain;
 
-import hello.Constants;
-
-import static hello.Constants.*;
+import static hello.Constants.AVATAR_PATH;
+import static hello.Constants.UPDATED;
+import static hello.Constants.USER_PHOTO_PATH;
 
 /**
  * @author Sergey Vorobyev.

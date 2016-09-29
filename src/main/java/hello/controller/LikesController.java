@@ -40,7 +40,6 @@ class LikesController {
     @PostMapping("/user/" + USED_ID + "/unlike")
     public ResponseEntity<AbsResponse> unlike(@RequestHeader(value="X-Access-Token") String token,
                                             @RequestHeader(value = "Request-User-Id") String userId) {
-
         if (token.equals(TOKEN)) {
             return ResponseEntity
                     .ok()

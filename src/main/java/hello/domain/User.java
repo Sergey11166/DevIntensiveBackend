@@ -1,5 +1,9 @@
 package hello.domain;
 
+import java.util.Random;
+
+import static hello.Constants.FIRST_NAMES;
+import static hello.Constants.SECOND_NAMES;
 import static hello.Constants.UPDATED;
 import static hello.Constants.USED_ID;
 
@@ -105,11 +109,11 @@ public class User {
         this.updated = updated;
     }
 
-    public static User createUser(String userPhoto, String avatar) {
+    public static User createUser(String userPhoto, String avatar, Random random) {
         User user = new User();
         user.setId(USED_ID);
-        user.setFirstName("Сергей");
-        user.setSecondName("Воробьёв");
+        user.setFirstName(FIRST_NAMES[random.nextInt(FIRST_NAMES.length)]);
+        user.setSecondName(SECOND_NAMES[random.nextInt(SECOND_NAMES.length)]);
         user.setV(0);
         user.setSpecialization("Android");
         user.setRole("user");

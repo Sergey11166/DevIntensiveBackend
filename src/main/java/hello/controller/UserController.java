@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.Random;
 
 import hello.request.UpdateContactsRequest;
 import hello.request.LoginRequest;
@@ -30,13 +31,14 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 public class UserController {
 
     @Autowired private StorageService storage;
+    private final Random random = new Random();
 
     @PostMapping("/login")
     public ResponseEntity<AbsResponse> login(@RequestBody LoginRequest request) {
         if (request.getEmail().equals("") && request.getPassword().equals("")) {
             return ResponseEntity
                     .ok()
-                    .body(createUserModelResponse(getUserPhoto(), getAvatar()));
+                    .body(createUserModelResponse(getUserPhoto(), getAvatar(), random));
         } else {
             return ResponseEntity
                     .status(FORBIDDEN)
@@ -50,7 +52,7 @@ public class UserController {
         if (token.equals(TOKEN)) {
             return ResponseEntity.
                     ok()
-                    .body(UserListResponse.createUserListResponse(getUserPhoto(), getAvatar()));
+                    .body(UserListResponse.createUserListResponse(getUserPhoto(), getAvatar(), random));
         } else {
             return ResponseEntity.status(FORBIDDEN)
                     .body(new ErrorResponse("Bad token"));

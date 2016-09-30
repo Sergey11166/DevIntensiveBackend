@@ -1,5 +1,7 @@
 package hello.response;
 
+import java.util.Random;
+
 import hello.domain.AuthData;
 
 /**
@@ -27,7 +29,7 @@ public class AuthResponse extends AbsResponse {
         this.data = data;
     }
 
-    public static AuthResponse createUserModelResponse(String userPhoto, String avatar) {
-        return new AuthResponse(AuthData.createData(userPhoto, avatar));
+    public static AuthResponse createUserModelResponse(String userPhoto, String avatar, Random random) {
+        return new AuthResponse(AuthData.createData(userPhoto, avatar, random));
     }
 }

@@ -1,5 +1,7 @@
 package hello.response;
 
+import java.util.Random;
+
 import hello.domain.UserListData;
 
 /**
@@ -27,9 +29,9 @@ public class UserListResponse extends AbsResponse {
         this.data = data;
     }
 
-    public static UserListResponse createUserListResponse(String userPhoto, String avatar) {
+    public static UserListResponse createUserListResponse(String userPhoto, String avatar, Random random) {
         UserListResponse response = new UserListResponse();
-        response.setData(UserListData.createUserListData(userPhoto, avatar));
+        response.setData(UserListData.createUserListData(userPhoto, avatar, random));
         return response;
     }
 }

@@ -15,4 +15,32 @@ public interface Constants {
     String CONTACT_PHONE   = "+7(917)000-00-00";
     String CONTACT_EMAIL   = "sevoro.sv@gmail.com";
     String CONTACT_VK      = "vk.com/sergey11166";
+
+    String[] FIRST_NAMES = {
+            "Сергей",
+            "Иван",
+            "Александр",
+            "Даниил",
+            "Владимир",
+            "Андрей",
+            "Олег",
+            "Игорь",
+            "Егор",
+            "Алексей",
+            "Михаил",
+            "Дмитрий",
+    };
+
+    String[] SECOND_NAMES = {
+            "Воробьёв",
+            "Иванов",
+            "Сидоров",
+            "Петров",
+            "Пушкин",
+            "Лермонтов",
+            "Сталин",
+            "Ленин",
+            "Булдаков",
+            "Ельцин"
+    };
 }

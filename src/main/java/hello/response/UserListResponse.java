@@ -4,6 +4,8 @@ import java.util.Random;
 
 import hello.domain.UserListData;
 
+import static hello.domain.UserListData.createUserListData;
+
 /**
  * @author Sergey Vorobyev
  */
@@ -31,7 +33,7 @@ public class UserListResponse extends AbsResponse {
 
     public static UserListResponse createUserListResponse(String userPhoto, String avatar, Random random) {
         UserListResponse response = new UserListResponse();
-        response.setData(UserListData.createUserListData(userPhoto, avatar, random));
+        response.setData(createUserListData(userPhoto, avatar, random));
         return response;
     }
 }

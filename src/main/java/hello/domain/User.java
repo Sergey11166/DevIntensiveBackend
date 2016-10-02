@@ -6,6 +6,10 @@ import static hello.Constants.FIRST_NAMES;
 import static hello.Constants.SECOND_NAMES;
 import static hello.Constants.UPDATED;
 import static hello.Constants.USED_ID;
+import static hello.domain.Contacts.*;
+import static hello.domain.ProfileValues.*;
+import static hello.domain.PublicInfo.*;
+import static hello.domain.Repositories.createRepositories;
 
 @SuppressWarnings("unused")
 public class User {
@@ -119,10 +123,10 @@ public class User {
         user.setRole("user");
         user.setUpdated(UPDATED);
 
-        user.setRepositories(Repositories.createRepositories());
-        user.setContacts(Contacts.createContacts());
-        user.setProfileValues(ProfileValues.createProfileValues());
-        user.setPublicInfo(PublicInfo.createPublicInfo(userPhoto, avatar));
+        user.setRepositories(createRepositories());
+        user.setContacts(createContacts());
+        user.setProfileValues(createProfileValues());
+        user.setPublicInfo(createPublicInfo(userPhoto, avatar));
 
         return user;
     }

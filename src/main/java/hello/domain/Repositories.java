@@ -2,8 +2,11 @@ package hello.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static hello.Constants.UPDATED;
+import static hello.domain.Repo.createRepo;
 
 @SuppressWarnings("unused")
 public class Repositories {
@@ -36,9 +39,12 @@ public class Repositories {
 
     public static Repositories createRepositories() {
         Repositories repositories = new Repositories();
-        List<Repo> repos = new ArrayList<>(1);
-        repos.add(Repo.createRepo());
-        repositories.setRepo(repos);
+
+        repositories.setRepo(IntStream
+                .rangeClosed(1, 5)
+                .mapToObj(index -> createRepo())
+                .collect(Collectors.toList()));
+
         repositories.setUpdated(UPDATED);
         return repositories;
     }

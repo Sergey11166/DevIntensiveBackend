@@ -13,17 +13,17 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.Random;
 
-import hello.request.UpdateContactsRequest;
 import hello.request.LoginRequest;
+import hello.request.UpdateContactsRequest;
 import hello.response.AbsResponse;
 import hello.response.ErrorResponse;
-import hello.response.UserListResponse;
 import hello.storage.StorageService;
 
 import static hello.Constants.TOKEN;
 import static hello.Constants.USED_ID;
 import static hello.response.AuthResponse.createUserModelResponse;
 import static hello.response.UpdateContactsResponse.createUpdateContactsResponse;
+import static hello.response.UserListResponse.createUserListResponse;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 @Controller
@@ -52,7 +52,7 @@ public class UserController {
         if (token.equals(TOKEN)) {
             return ResponseEntity.
                     ok()
-                    .body(UserListResponse.createUserListResponse(getUserPhoto(), getAvatar(), random));
+                    .body(createUserListResponse(getUserPhoto(), getAvatar(), random));
         } else {
             return ResponseEntity.status(FORBIDDEN)
                     .body(new ErrorResponse("Bad token"));

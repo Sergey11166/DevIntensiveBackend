@@ -3,6 +3,7 @@ package hello.domain;
 import java.util.Random;
 
 import static hello.Constants.TOKEN;
+import static hello.Constants.USER_ID;
 
 @SuppressWarnings("unused")
 public class AuthData {
@@ -35,7 +36,7 @@ public class AuthData {
 
     public static AuthData createData(String userPhoto, String avatar, Random random) {
         AuthData authData = new AuthData();
-        authData.setUser(User.createUser(userPhoto, avatar, random));
+        authData.setUser(User.createUser(USER_ID, userPhoto, avatar, random));
         authData.setToken(TOKEN);
         return authData;
     }

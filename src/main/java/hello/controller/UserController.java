@@ -20,7 +20,7 @@ import hello.response.ErrorResponse;
 import hello.storage.StorageService;
 
 import static hello.Constants.TOKEN;
-import static hello.Constants.USED_ID;
+import static hello.Constants.USER_ID;
 import static hello.response.AuthResponse.createUserModelResponse;
 import static hello.response.UpdateContactsResponse.createUpdateContactsResponse;
 import static hello.response.UserListResponse.createUserListResponse;
@@ -59,7 +59,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("user/" + USED_ID + "/contacts")
+    @PutMapping("user/" + USER_ID + "/contacts")
     public ResponseEntity<AbsResponse> updateContacts(@RequestBody UpdateContactsRequest request,
             @RequestHeader(value="X-Access-Token") String token,
             @RequestHeader(value = "Request-User-Id") String userId) {

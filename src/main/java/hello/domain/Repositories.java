@@ -37,12 +37,12 @@ public class Repositories {
         this.updated = updated;
     }
 
-    public static Repositories createRepositories() {
+    public static Repositories createRepositories(String userId) {
         Repositories repositories = new Repositories();
 
         repositories.setRepo(IntStream
                 .rangeClosed(1, 5)
-                .mapToObj(index -> createRepo())
+                .mapToObj(index -> createRepo(userId + index))
                 .collect(Collectors.toList()));
 
         repositories.setUpdated(UPDATED);

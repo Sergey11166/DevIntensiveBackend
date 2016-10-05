@@ -27,7 +27,7 @@ import hello.storage.StorageFileNotFoundException;
 import hello.storage.StorageService;
 
 import static hello.Constants.TOKEN;
-import static hello.Constants.USED_ID;
+import static hello.Constants.USER_ID;
 import static hello.domain.ImageData.createImageDataAvatar;
 import static hello.domain.ImageData.createImageDataProfilePhoto;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
@@ -83,7 +83,7 @@ class UploadImageController {
         return "redirect:/files";
     }
 
-    @PostMapping("/user/" + USED_ID + "/publicValues/profilePhoto")
+    @PostMapping("/user/" + USER_ID + "/publicValues/profilePhoto")
     public ResponseEntity<AbsResponse> handleUserPhotoUpload(
             @RequestParam("file") MultipartFile file,
             @RequestHeader(value="X-Access-Token") String token,
@@ -102,7 +102,7 @@ class UploadImageController {
         }
     }
 
-    @PostMapping("/user/" + USED_ID + "/publicValues/profileAvatar")
+    @PostMapping("/user/" + USER_ID + "/publicValues/profileAvatar")
     public ResponseEntity<AbsResponse> handleAvatarUpload(@RequestParam("file") MultipartFile file,
             @RequestHeader(value="X-Access-Token") String token,
             @RequestHeader(value = "Request-User-Id") String userId) {

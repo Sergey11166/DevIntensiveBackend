@@ -6,7 +6,7 @@ import java.util.List;
 
 import hello.Constants;
 
-import static hello.Constants.USED_ID;
+import static hello.Constants.USER_ID;
 
 /**
  * @author Sergey Vorobyev
@@ -77,7 +77,7 @@ public class LikesData {
         data.setHomeTask(7);
         data.setProjects(5);
         data.setLinesCode(1050);
-        data.setLikesBy(Collections.singletonList(USED_ID));
+        data.setLikesBy(Collections.singletonList(USER_ID));
         data.setRait(6);
         data.setUpdated(Constants.UPDATED);
         data.setRating(7);

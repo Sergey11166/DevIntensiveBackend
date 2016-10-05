@@ -10,7 +10,7 @@ import hello.response.ErrorResponse;
 import hello.response.LikeResponse;
 
 import static hello.Constants.TOKEN;
-import static hello.Constants.USED_ID;
+import static hello.Constants.USER_ID;
 import static hello.domain.LikesData.createLikeData;
 import static hello.domain.LikesData.createUnlikeData;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
@@ -23,7 +23,7 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 @SuppressWarnings("unused")
 class LikesController {
 
-    @PostMapping("/user/" + USED_ID + "/like")
+    @PostMapping("/user/" + USER_ID + "/like")
     public ResponseEntity<AbsResponse> like(@RequestHeader(value="X-Access-Token") String token,
             @RequestHeader(value = "Request-User-Id") String userId) {
 
@@ -37,7 +37,7 @@ class LikesController {
         }
     }
 
-    @PostMapping("/user/" + USED_ID + "/unlike")
+    @PostMapping("/user/" + USER_ID + "/unlike")
     public ResponseEntity<AbsResponse> unlike(@RequestHeader(value="X-Access-Token") String token,
                                             @RequestHeader(value = "Request-User-Id") String userId) {
         if (token.equals(TOKEN)) {

@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static hello.Constants.USER_ID;
 import static hello.domain.User.createUser;
 
 /**
@@ -28,7 +29,7 @@ public class UserListData {
 
         data.setUsers(IntStream
                 .rangeClosed(1, 10)
-                .mapToObj(index -> createUser(userPhoto, avatar, random))
+                .mapToObj(index -> createUser(USER_ID + index, userPhoto, avatar, random))
                 .collect(Collectors.toList()));
 
         return data;

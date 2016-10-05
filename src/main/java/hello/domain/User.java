@@ -5,7 +5,6 @@ import java.util.Random;
 import static hello.Constants.FIRST_NAMES;
 import static hello.Constants.SECOND_NAMES;
 import static hello.Constants.UPDATED;
-import static hello.Constants.USED_ID;
 import static hello.domain.Contacts.*;
 import static hello.domain.ProfileValues.*;
 import static hello.domain.PublicInfo.*;
@@ -113,20 +112,19 @@ public class User {
         this.updated = updated;
     }
 
-    public static User createUser(String userPhoto, String avatar, Random random) {
+    public static User createUser(String id, String userPhoto, String avatar, Random random) {
         User user = new User();
-        user.setId(USED_ID);
+        user.setId(id);
         user.setFirstName(FIRST_NAMES[random.nextInt(FIRST_NAMES.length)]);
         user.setSecondName(SECOND_NAMES[random.nextInt(SECOND_NAMES.length)]);
         user.setV(0);
         user.setSpecialization("Android");
         user.setRole("user");
         user.setUpdated(UPDATED);
-
-        user.setRepositories(createRepositories());
         user.setContacts(createContacts());
         user.setProfileValues(createProfileValues());
         user.setPublicInfo(createPublicInfo(userPhoto, avatar));
+        user.setRepositories(createRepositories(id));
 
         return user;
     }

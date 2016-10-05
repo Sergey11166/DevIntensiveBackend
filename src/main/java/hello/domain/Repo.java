@@ -39,9 +39,9 @@ public class Repo {
         this.title = title;
     }
 
-    public static Repo createRepo() {
+    public static Repo createRepo(String id) {
         Repo repo = new Repo();
-        repo.setId("57651280a38f231d00a6cceb");
+        repo.setId(id);
         repo.setGit("github.com/sergey11166/DevIntensive");
         repo.setTitle("");
         return repo;
